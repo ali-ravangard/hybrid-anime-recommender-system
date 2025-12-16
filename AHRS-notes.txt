@@ -1,0 +1,76 @@
+Anime Hybrid Recommender System
+
+2. Database Setup using GCP Buckets
+    In GCP > search Buckets > Create > name: anime-hybrid-recommender-system >
+    untick enforce pulblic access prevention on htis bucket > Create
+
+    In Bucket > upload > anime, animelist, anime_with_synopsis
+
+3. Project Setup
+    run: 
+        pip install -e .
+
+4. Data Ingestion with GCP
+    Install google cloud CLI
+    run:
+        gcloud --version
+        pip install -e .
+
+    In GCP > IAM & Admin > Service Accounts > Create Service Account >
+    name: anime-hybrid-recommender-system (should be unique globally) >
+    create and continue > roles: Storage Admin, Storage Object Viewer,
+    Owner > continue & done
+
+    In Service Accounts > ... menue of your Service Account > Manage Keys >
+    Add Key > New Key > JSON > It will download a JSON file
+
+    In bucket > ... menu of your bucket > edit access > Add Principal > 
+    select your Service Account > role: Storage Object Admin, Storage Object Viewer
+
+    run:
+        set GOOGLE_APPLICATION_CREDENTIALS=paste path of key JSON file here
+
+        pip install -e .
+
+5 & 6. Jupyter Notebook Testing
+    install Jupyter extension on VSC
+    run:
+        pip install -e .
+
+7. Data Processing
+8. Model Architecture and Model Training
+
+9. Experiment Tracking using COMET-ML
+    run:
+            pip install -e .
+
+    COMET ML website > Try COMET for free > login > New project >
+    name: anime-hybrid-recommender-system > public > create
+    
+    Click on your profile picture > API Key > copy API  key
+    set 'api_key' & 'workspace' in ModelTraining initializer in 'model_training.py'
+    after run 'model_training.py' check your Experiment in COMET ML website
+
+10. Build Training Pipeline
+
+11. Data Versioning using DVC & Code Versioning using GitHub
+    In GCP > search Buckets > Create > name: my-dvc-bucket (should be unique) >
+    untick enforce pulblic access prevention on htis bucket > Create
+
+    In Buckets > in ... menu of 'my-dvc-bucket' > data access >Add Principal > 
+    select your Service Account > role: Storage Object Admin, Storage Object Viewer
+
+    In Bucket > upload > anime, animelist, anime_with_synopsis
+
+    run:
+        pip install -e .
+
+
+
+
+
+
+
+
+
+
