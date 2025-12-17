@@ -64,10 +64,78 @@ Anime Hybrid Recommender System
 
     run:
         pip install -e .
+        dvc init .
+        dvc add artifacts/raw
+        dvc add artifacts/processed
+        dvc add artifacts/model
+        dvc add artifacts/model_checkpoint
+        dvc add artifacts/weights
+        dvc status
+        git add .
+        git commit -m "Add dvc files"
+        dvc remote add -d myremote gs://my-dvc-bucket/
+        dvc push
 
+        dvc pull (for fetch data from GCP Bucket)
 
+        create a GitHub repo and push your local repo to that
 
+12. Building Prediction Helper Functions
 
+13. User App Building with Flask and ChatGPT
+    run:
+        pip install -e .
+
+14. CI-CD Deployment using Jenkins and Google Kubernetes
+
+14.1. Setup Jenkins Container
+    run:
+        cd custom_jenkins
+        docker build -t jenkins-dind-AHRS .
+        docker images
+        docker run -d --name jenkins-dind-AHRS ^
+        --privileged ^
+        -p 8080:8080 -p 50000:50000 ^
+        -v //var/run/docker.sock:/var/run/docker.sock ^
+        -v jenkins_home:/var/jenkins_home ^
+        jenkins-dind-AHRS
+
+        docker ps
+        docker logs jenkins-dind-AHRS
+
+    In Jenkins > copy user admin password paste it in localhost:8080 >
+    select install suggested plugings > create first admin user > 
+    start using Jenkins
+
+    run:
+        docker exec -u root -it jenkins-dind-AHRS bash
+        apt update -y
+        apt install -y python3
+        python3 --version
+        ln -s /usr/bin/python3 /usr/bin/python
+        python --version
+        apt install -y python3-pip
+        apt install -y python3-venv
+        extension
+
+        docker restart jenkins-dind-AHRS
+
+14.2. Github Integration
+    In Github > Settings > Developer Settings > Personal access tokens >
+    Tokens(classic) > Generate new token (classic) > note: AHRS-token >
+    permissions: repo, admin:repo-hook > Generate token > copy token
+
+    In Jenkins > Manage Jenkins > Credentials > gloabl > Add Credentials >
+    username: github user name > password: access token > ID: AHRS:token >
+    Description: AHRS-token > create
+    In Jenkins > New Item > name: AHRS-MLOPS > Pipeline > 
+    Definition: Pipeline script from SCM> SCM:Git > Reposigoty URL: github repo URL >
+    credentials: select your credential > branch specifier: */main >
+    Apply > Save
+
+    In Jenkins > AHRS-MLOPS > Pipeline Syntax > sample setup: checkout: Check out from version control
+    repository URL: github repo URL > select credential > Branch specifier: */main >
+    Generate Pipeline Script
 
 
 
