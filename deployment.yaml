@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: anime-hybrid-recommender-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: anime-hybrid-recommender-system
+  template:
+    metadata:
+      labels:
+        app: anime-hybrid-recommender-system
+    spec:
+      containers:
+      - name: anime-hybrid-recommender-system-container
+        image: gcr.io/${GCP_PROJECT}/anime-hybrid-recommender-system:latest
+        ports:
+        - containerPort: 5000  # Replace with the port your app listens on
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: anime-hybrid-recommender-system-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: anime-hybrid-recommender-system
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5000
