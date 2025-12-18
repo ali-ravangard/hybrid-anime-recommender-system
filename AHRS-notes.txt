@@ -125,9 +125,11 @@ Anime Hybrid Recommender System
     Tokens(classic) > Generate new token (classic) > note: AHRS-token >
     permissions: repo, admin:repo-hook > Generate token > copy token
 
-    In Jenkins > Manage Jenkins > Credentials > gloabl > Add Credentials >
+    In Jenkins > Manage Jenkins > Credentials > global > Add Credentials >
+    kind: Username with password > Scope: Global(Jenkins, nodes, items, all child items, etc)>
     username: github user name > password: access token > ID: AHRS:token >
     Description: AHRS-token > create
+
     In Jenkins > New Item > name: AHRS-MLOPS > Pipeline > 
     Definition: Pipeline script from SCM> SCM:Git > Reposigoty URL: github repo URL >
     credentials: select your credential > branch specifier: */main >
@@ -136,6 +138,21 @@ Anime Hybrid Recommender System
     In Jenkins > AHRS-MLOPS > Pipeline Syntax > sample setup: checkout: Check out from version control
     repository URL: github repo URL > select credential > Branch specifier: */main >
     Generate Pipeline Script
+
+    In Jenkinsfile > paste Pipeline script in first stage
+
+    push your local repo to github
+
+    In Jenkins > AHRS-MLOPS > Build Now
+
+14.3. Dockerization of Project
+
+    In Jenkins > Manage Jenkins > Credentials > global > Add Credentials >
+    username: github user name > password: access token > ID: AHRS:token >
+    Description: AHRS-token > create > kind: Secret file > 
+    Scope: Global(Jenkins, nodes, items, all child items, etc) >
+    upload service account key file > ID: gpc-key > Description: gcp-key
+
 
 
 
