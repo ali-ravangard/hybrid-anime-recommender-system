@@ -197,6 +197,12 @@ Anime Hybrid Recommender System
 
     push your local repo to github repo
 
+    In Jenkins > AHRS-MLOPS > Build Now
+
+    In GCP > check GCR, Kubernetes Engine cluster and workloads
+
+    Go to endpoint and check your App
+
 
 
 
